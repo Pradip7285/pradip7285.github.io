@@ -17,19 +17,40 @@
             --dark-gray: #495057;
             --bg: #ffffff;
             --card-bg: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary: #4895ef;
+            --primary-dark: #4361ee;
+            --secondary: #f72585;
+            --dark: #f8f9fa;
+            --light: #14213d;
+            --gray: #6c757d;
+            --dark-gray: #adb5bd;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --text: #f8f9fa;
+            --text-light: #adb5bd;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.7;
-            color: var(--dark);
+            color: var(--text);
             background-color: var(--bg);
             overflow-x: hidden;
         }
@@ -88,7 +109,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
@@ -176,6 +197,36 @@
             transform: translateY(-3px);
         }
 
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode .theme-toggle {
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--dark);
+        }
+
         /* Main Content Styles */
         .container {
             max-width: 1200px;
@@ -189,13 +240,13 @@
             border-radius: 12px;
             padding: 2.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
             transition: var(--transition);
             border: 1px solid rgba(0, 0, 0, 0.03);
         }
 
         section:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-hover);
             transform: translateY(-5px);
         }
 
@@ -227,7 +278,7 @@
         }
 
         p {
-            color: var(--dark-gray);
+            color: var(--text-light);
             margin-bottom: 1rem;
         }
 
@@ -251,6 +302,10 @@
             border-left: 3px solid var(--primary);
         }
 
+        .dark-mode .skill-category {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
         .skill-category h3 {
             font-size: 1.1rem;
             margin-bottom: 1rem;
@@ -268,6 +323,7 @@
             margin-bottom: 0.7rem;
             position: relative;
             padding-left: 1.5rem;
+            color: var(--text-light);
         }
 
         .skill-category li::before {
@@ -327,6 +383,7 @@
             margin-bottom: 0.7rem;
             position: relative;
             padding-left: 1.8rem;
+            color: var(--text-light);
         }
 
         .job li::before {
@@ -346,6 +403,10 @@
             border-left: 3px solid var(--primary);
         }
 
+        .dark-mode .project {
+            background: rgba(30, 30, 30, 0.5);
+        }
+
         .project-title {
             font-weight: 600;
             color: var(--dark);
@@ -355,11 +416,72 @@
             gap: 0.5rem;
         }
 
+        /* Projects Gallery */
+        .projects-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .project-card {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .project-image {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .project-content {
+            padding: 1.2rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .tech-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
         /* Education Section */
         .education-item {
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
             border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .education-item {
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
         }
 
         .education-item:last-child {
@@ -383,6 +505,7 @@
             align-items: center;
             gap: 0.7rem;
             transition: var(--transition);
+            color: var(--text-light);
         }
 
         .cert-badge:hover {
@@ -420,6 +543,77 @@
             transform: translateY(-3px);
         }
 
+        /* Contact Form */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            background: var(--card-bg);
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .dark-mode input,
+        .dark-mode textarea {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -444,8 +638,20 @@
         section:nth-child(4) { animation-delay: 0.4s; }
         section:nth-child(5) { animation-delay: 0.5s; }
         section:nth-child(6) { animation-delay: 0.6s; }
+        section:nth-child(7) { animation-delay: 0.7s; }
+        section:nth-child(8) { animation-delay: 0.8s; }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+
         @media (max-width: 768px) {
             header {
                 padding: 3rem 1.5rem;
@@ -487,7 +693,7 @@
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
             .job-title {
                 flex-direction: column;
                 align-items: flex-start;
@@ -497,10 +703,24 @@
             .date {
                 margin-top: 0.3rem;
             }
+            
+            .projects-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <header>
         <div class="header-content">
             <div class="profile-img-container">
@@ -531,7 +751,7 @@
                     <a href="https://github.com/pradip7285" target="_blank" class="social-link">
                         <i class="fab fa-github"></i>
                     </a>
-<!--                     <a href="#" class="social-link">
+                    <!-- <a href="#" class="social-link">
                         <i class="fas fa-globe"></i>
                     </a> -->
                 </div>
@@ -592,20 +812,6 @@
                     <li>Created and maintained custom CMS features and dynamic data entry modules</li>
                     <li>Improved user interfaces with responsive HTML/CSS and vanilla JavaScript</li>
                 </ul>
-                
-                <h4 style="margin-top: 1.5rem; color: var(--dark-gray); font-weight: 500;">Key Projects:</h4>
-                <div class="project">
-                    <p class="project-title"><i class="fas fa-project-diagram"></i> Tourism Website</p>
-                    <p>Developed complete frontend and backend functionalities for booking and content management</p>
-                </div>
-                <div class="project">
-                    <p class="project-title"><i class="fas fa-project-diagram"></i> Salon Management System</p>
-                    <p>Built appointment scheduling, POS, and role-based login modules</p>
-                </div>
-                <div class="project">
-                    <p class="project-title"><i class="fas fa-project-diagram"></i> Residential Management System</p>
-                    <p>Implemented visitor log, billing module, and tenant management</p>
-                </div>
             </div>
             
             <div class="job">
@@ -630,6 +836,50 @@
                     <li>Provided end-user IT support and maintained hardware/software configurations</li>
                     <li>Assisted in secure account setups, and Office 365 administration</li>
                 </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-project-diagram"></i> Projects Gallery</h2>
+            <div class="projects-gallery">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400?text=Tourism+Website" alt="Tourism Website" class="project-image">
+                    <div class="project-content">
+                        <h3>Tourism Website</h3>
+                        <p>Complete frontend and backend functionalities for booking and content management system.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400?text=Salon+Management" alt="Salon Management System" class="project-image">
+                    <div class="project-content">
+                        <h3>Salon Management System</h3>
+                        <p>Appointment scheduling, POS, and role-based login modules for salon businesses.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">jQuery</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400?text=Residential+System" alt="Residential Management System" class="project-image">
+                    <div class="project-content">
+                        <h3>Residential Management</h3>
+                        <p>Visitor log, billing module, and tenant management system for residential complexes.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Core PHP</span>
+                            <span class="tech-tag">Tailwind</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -683,6 +933,33 @@
                 </div>
             </div>
         </section>
+
+        <section id="contact">
+            <h2><i class="fas fa-envelope"></i> Contact Me</h2>
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group full-width">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-group full-width" style="text-align: right;">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </div>
+            </form>
+        </section>
     </div>
 
     <footer>
@@ -693,13 +970,66 @@
         // Auto-update copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
         
-        // Add smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme') || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+        
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                const formData = new FormData(this);
+                
+                // Replace with your actual form submission handling
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Message sent successfully!');
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                })
+                .catch(error => {
+                    alert('There was a problem sending your message. Please try again later.');
+                    console.error('Error:', error);
                 });
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
