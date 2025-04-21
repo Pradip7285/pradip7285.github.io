@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pradip Paul | PHP Web Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #f72585;
+            --dark: #14213d;
+            --light: #f8f9fa;
+            --gray: #adb5bd;
+            --dark-gray: #495057;
+            --bg: #ffffff;
+            --card-bg: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--bg);
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/always-grey.png');
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+            position: relative;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px dashed var(--secondary);
+            animation: rotate 20s linear infinite;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 3rem auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        section:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 3px;
+        }
+
+        h3 {
+            color: var(--dark);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Professional Summary */
+        .summary {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(67, 97, 238, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-category li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        /* Experience Section */
+        .job {
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .job:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 30px;
+            bottom: -25px;
+            width: 2px;
+            background: var(--gray);
+            opacity: 0.3;
+        }
+
+        .job-title {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .company {
+            font-weight: 500;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            background: rgba(247, 37, 133, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+        }
+
+        .job ul {
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .job li {
+            margin-bottom: 0.7rem;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .job li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .project {
+            margin-bottom: 1.5rem;
+            background: rgba(248, 249, 250, 0.5);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Education Section */
+        .education-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+        }
+
+        .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Certifications */
+        .certifications {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cert-badge {
+            background: rgba(67, 97, 238, 0.1);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: var(--transition);
+        }
+
+        .cert-badge:hover {
+            background: rgba(67, 97, 238, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .cert-badge i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Interests */
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .interest-item {
+            background: rgba(247, 37, 133, 0.1);
+            color: var(--secondary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .interest-item:hover {
+            background: rgba(247, 37, 133, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+        section:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .profile-img-container {
+                margin: 0 auto;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                margin-top: -30px;
+                padding: 0 1.5rem;
+            }
+            
+            section {
+                padding: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .job-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .date {
+                margin-top: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="profile-img-container">
+                <!-- Replace with your actual profile image -->
+                <img src="https://via.placeholder.com/180" alt="Pradip Paul" class="profile-img">
+            </div>
+            <div class="header-text">
+                <h1>Pradip Paul</h1>
+                <p class="tagline">PHP Web Developer</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Bankura, West Bengal, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 6295633046</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>pradip7285@gmail.com</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/pradip7285" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/yourusername" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2><i class="fas fa-user-tie"></i> Professional Summary</h2>
+            <p class="summary">Enthusiastic and skilled PHP Developer with 1.5+ years of hands-on experience in Core PHP, and over 3 years of experience in Technical Support Engineering. Proficient in HTML, CSS, JavaScript, and MySQL, with a keen understanding of MVC structure and backend development. Passionate about creating scalable and maintainable code and transitioning successfully from IT support into full-stack web development.</p>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-laptop-code"></i> Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Web Development</h3>
+                    <ul>
+                        <li>Core PHP</li>
+                        <li>HTML5, CSS3</li>
+                        <li>JavaScript</li>
+                        <li>MySQL</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> Frameworks & Tools</h3>
+                    <ul>
+                        <li>Laravel (Basic)</li>
+                        <li>VS Code</li>
+                        <li>Git</li>
+                        <li>Postman</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-network-wired"></i> Networking & Support</h3>
+                    <ul>
+                        <li>TCP/IP, VPN</li>
+                        <li>DNS, DHCP</li>
+                        <li>ITIL Processes</li>
+                        <li>TeamViewer, AnyDesk</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            
+            <div class="job">
+                <div class="job-title">
+                    <h3>PHP Developer</h3>
+                    <span class="date">Dec 2023 - Present</span>
+                </div>
+                <p class="company">Addforum Technologies</p>
+                <ul>
+                    <li>Designed and developed full-stack web applications using Core PHP and MySQL</li>
+                    <li>Created and maintained custom CMS features and dynamic data entry modules</li>
+                    <li>Improved user interfaces with responsive HTML/CSS and vanilla JavaScript</li>
+                </ul>
+                
+                <h4 style="margin-top: 1.5rem; color: var(--dark-gray); font-weight: 500;">Key Projects:</h4>
+                <div class="project">
+                    <p class="project-title"><i class="fas fa-project-diagram"></i> Tourism Website</p>
+                    <p>Developed complete frontend and backend functionalities for booking and content management</p>
+                </div>
+                <div class="project">
+                    <p class="project-title"><i class="fas fa-project-diagram"></i> Salon Management System</p>
+                    <p>Built appointment scheduling, POS, and role-based login modules</p>
+                </div>
+                <div class="project">
+                    <p class="project-title"><i class="fas fa-project-diagram"></i> Residential Management System</p>
+                    <p>Implemented visitor log, billing module, and tenant management</p>
+                </div>
+            </div>
+            
+            <div class="job">
+                <div class="job-title">
+                    <h3>Senior Technical Support Engineer</h3>
+                    <span class="date">Jun 2022 - Nov 2023</span>
+                </div>
+                <p class="company">Inspirisys Solutions (Client: Diageo India)</p>
+                <ul>
+                    <li>Handled second-level support for enterprise applications ensuring 99.9% uptime</li>
+                    <li>Collaborated with development teams to analyze and resolve system bugs</li>
+                </ul>
+            </div>
+            
+            <div class="job">
+                <div class="job-title">
+                    <h3>Desktop Support Engineer</h3>
+                    <span class="date">Nov 2021 - Jun 2022 / Feb 2020 - Mar 2021</span>
+                </div>
+                <p class="company">Team Computers / Tansam Engineering</p>
+                <ul>
+                    <li>Provided end-user IT support and maintained hardware/software configurations</li>
+                    <li>Assisted in secure account setups, and Office 365 administration</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="education-item">
+                <div class="job-title">
+                    <h3>Master of Computer Applications (MCA)</h3>
+                    <span class="date">2024</span>
+                </div>
+                <p class="company">Chandigarh University | Distance & Online</p>
+            </div>
+            
+            <div class="education-item">
+                <div class="job-title">
+                    <h3>Bachelor of Science (Hons in Computer Science)</h3>
+                    <span class="date">2020</span>
+                </div>
+                <p class="company">Sidho Kanho Birsha University</p>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-certificate"></i> Certifications</h2>
+            <div class="certifications">
+                <div class="cert-badge">
+                    <i class="fab fa-meta"></i>
+                    <span>Meta Front-End Developer (Coursera)</span>
+                </div>
+                <div class="cert-badge">
+                    <i class="fas fa-database"></i>
+                    <span>SQL (Intermediate) – HackerRank</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-heart"></i> Interests</h2>
+            <div class="interests">
+                <div class="interest-item">
+                    <i class="fas fa-laptop"></i>
+                    <span>Learning New Technologies</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-code"></i>
+                    <span>Coding & Problem-Solving</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Gaming</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© <span id="year"></span> Pradip Paul. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Auto-update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
